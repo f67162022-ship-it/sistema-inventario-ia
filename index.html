@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -9,15 +9,15 @@
 <style>
 :root {
     --azul: #172554;
-    --azul-claro: #2563eb;
     --oscuro: #111827;
+    --primario: #2563eb;
     --fondo: #f4f6f9;
     --blanco: #ffffff;
     --gris: #6b7280;
+    --borde: #e5e7eb;
     --rojo: #dc2626;
     --amarillo: #d97706;
     --verde: #16a34a;
-    --borde: #e5e7eb;
 }
 
 * {
@@ -30,15 +30,21 @@ html {
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
     background: var(--fondo);
     color: #1f2937;
+    font-family: Arial, sans-serif;
+}
+
+button,
+input,
+select {
+    font: inherit;
 }
 
 header {
+    padding: 22px 30px;
     background: var(--azul);
     color: white;
-    padding: 22px 30px;
 }
 
 header h1 {
@@ -56,41 +62,41 @@ header p {
     min-height: calc(100vh - 103px);
 }
 
-.sidebar {
+.menu-lateral {
     width: 230px;
-    background: var(--oscuro);
     padding: 22px 14px;
+    background: var(--oscuro);
     color: white;
 }
 
-.sidebar h2 {
+.menu-lateral h2 {
+    margin: 0 0 20px;
     text-align: center;
     font-size: 17px;
 }
 
-.menu {
+.boton-menu {
     display: block;
     width: 100%;
-    border: none;
+    margin: 5px 0;
+    padding: 13px;
+    border: 0;
+    border-radius: 8px;
     background: transparent;
     color: white;
     text-align: left;
-    padding: 13px;
-    margin: 5px 0;
-    border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
 }
 
-.menu:hover,
-.menu.activo {
+.boton-menu:hover,
+.boton-menu.activo {
     background: #1e3a8a;
 }
 
 .principal {
     flex: 1;
-    padding: 27px;
     min-width: 0;
+    padding: 27px;
 }
 
 .vista {
@@ -111,8 +117,8 @@ header p {
 }
 
 .titulo p {
+    margin: 5px 0 0;
     color: var(--gris);
-    margin-top: 5px;
 }
 
 .kpis {
@@ -124,10 +130,10 @@ header p {
 
 .kpi,
 .tarjeta {
-    background: white;
-    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    background: var(--blanco);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .kpi h3 {
@@ -137,7 +143,7 @@ header p {
 }
 
 .kpi strong {
-    font-size: 26px;
+    font-size: 25px;
 }
 
 .tarjeta {
@@ -149,11 +155,22 @@ header p {
     color: var(--azul);
 }
 
+.dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 .herramientas {
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 15px;
+}
+
+.herramientas input {
+    flex: 1;
+    min-width: 230px;
 }
 
 input,
@@ -164,23 +181,18 @@ select {
     background: white;
 }
 
-#buscar {
-    min-width: 240px;
-    flex: 1;
-}
-
 .boton {
-    border: none;
-    border-radius: 8px;
     padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--primario);
     color: white;
-    background: var(--azul-claro);
     font-weight: bold;
     cursor: pointer;
 }
 
 .boton:hover {
-    filter: brightness(0.93);
+    filter: brightness(0.92);
 }
 
 .boton-verde {
@@ -206,7 +218,7 @@ select {
 
 table {
     width: 100%;
-    min-width: 850px;
+    min-width: 900px;
     border-collapse: collapse;
 }
 
@@ -215,6 +227,7 @@ td {
     padding: 10px;
     border-bottom: 1px solid var(--borde);
     text-align: left;
+    vertical-align: top;
     font-size: 13px;
 }
 
@@ -245,20 +258,96 @@ th {
     color: #166534;
 }
 
-.alerta {
-    padding: 15px;
-    border-left: 5px solid var(--rojo);
-    background: #fff5f5;
+.aviso {
+    margin-bottom: 15px;
+    padding: 13px;
+    border-left: 5px solid var(--primario);
     border-radius: 8px;
-    margin-bottom: 12px;
+    background: #eff6ff;
 }
 
-.aviso {
-    padding: 13px;
-    background: #eff6ff;
-    border-left: 5px solid var(--azul-claro);
+.alerta {
+    margin-bottom: 10px;
+    padding: 14px;
+    border-left: 5px solid var(--rojo);
     border-radius: 8px;
-    margin-bottom: 15px;
+    background: #fff5f5;
+}
+
+.barra-fila {
+    display: grid;
+    grid-template-columns: 90px 1fr 40px;
+    gap: 10px;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.barra-fondo {
+    height: 16px;
+    overflow: hidden;
+    border-radius: 9px;
+    background: #e5e7eb;
+}
+
+.barra {
+    height: 100%;
+    border-radius: 9px;
+}
+
+.barra-alto {
+    background: var(--rojo);
+}
+
+.barra-medio {
+    background: var(--amarillo);
+}
+
+.barra-bajo {
+    background: var(--verde);
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.modal.activo {
+    display: flex;
+}
+
+.modal-contenido {
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 22px;
+    border-radius: 12px;
+    background: white;
+}
+
+.modal-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cerrar {
+    border: 0;
+    background: transparent;
+    font-size: 27px;
+    cursor: pointer;
 }
 
 .formulario {
@@ -282,52 +371,9 @@ th {
     width: 100%;
 }
 
-.acciones {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    z-index: 20;
-}
-
-.modal.activo {
-    display: flex;
-}
-
-.modal-contenido {
-    background: white;
-    width: 100%;
-    max-width: 700px;
-    max-height: 90vh;
-    overflow: auto;
-    border-radius: 12px;
-    padding: 22px;
-}
-
-.modal-cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cerrar {
-    border: none;
-    background: transparent;
-    font-size: 27px;
-    cursor: pointer;
-}
-
-.interpretacion {
-    line-height: 1.6;
+.texto-gris {
+    color: var(--gris);
+    font-size: 13px;
 }
 
 @media (max-width: 950px) {
@@ -335,18 +381,18 @@ th {
         display: block;
     }
 
-    .sidebar {
-        width: 100%;
+    .menu-lateral {
         display: flex;
-        overflow-x: auto;
+        width: 100%;
         gap: 5px;
+        overflow-x: auto;
     }
 
-    .sidebar h2 {
+    .menu-lateral h2 {
         display: none;
     }
 
-    .menu {
+    .boton-menu {
         width: auto;
         white-space: nowrap;
     }
@@ -354,9 +400,13 @@ th {
     .kpis {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .dos-columnas {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width: 570px) {
+@media (max-width: 580px) {
     header h1 {
         font-size: 21px;
     }
@@ -382,23 +432,1645 @@ th {
 
 <div class="contenedor">
 
-<nav class="sidebar">
+<nav class="menu-lateral" aria-label="Menú principal">
     <h2>MENÚ</h2>
 
-    <button class="menu activo" data-vista="inicio">
+    <button class="boton-menu activo" data-vista="inicio">
         🏠 Inicio
     </button>
 
-    <button class="menu" data-vista="inventario">
+    <button class="boton-menu" data-vista="inventario">
         📦 Inventario
     </button>
 
-    <button class="menu" data-vista="alertas">
+    <button class="boton-menu" data-vista="alertas">
         ⚠️ Alertas
     </button>
 
-    <button class="menu" data-vista="analisis">
+    <button class="boton-menu" data-vista="analisis">
         🤖 Análisis IA
     </button>
 
-    <button class="menu" data-
+    <button class="boton-menu" data-vista="reportes">
+        📊 Reportes
+    </button>
+</nav>
+
+<main class="principal">
+
+<section id="inicio" class="vista activa">
+
+    <div class="titulo">
+        <h2>Panel de control</h2>
+        <p>Resumen calculado a partir del inventario actual.</p>
+    </div>
+
+    <div class="kpis">
+        <div class="kpi">
+            <h3>Productos registrados</h3>
+            <strong id="totalProductos">0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Productos en riesgo alto</h3>
+            <strong id="totalAlto">0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Unidades físicas</h3>
+            <strong id="totalFisico">0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Diferencia absoluta</h3>
+            <strong id="totalDiferencia">0</strong>
+        </div>
+    </div>
+
+    <div class="dos-columnas">
+        <div class="tarjeta">
+            <h3>Distribución del riesgo</h3>
+            <div id="distribucionRiesgo"></div>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Alertas prioritarias</h3>
+            <div id="alertasInicio"></div>
+        </div>
+    </div>
+
+    <div class="aviso">
+        <strong>Uso académico:</strong>
+        los 80 productos iniciales son simulados. Los cambios realizados
+        posteriormente se guardan en el navegador.
+    </div>
+
+</section>
+
+<section id="inventario" class="vista">
+
+    <div class="titulo">
+        <h2>Inventario</h2>
+        <p>Consulta, crea, edita, ajusta y elimina productos.</p>
+    </div>
+
+    <div class="tarjeta">
+
+        <div class="herramientas">
+            <input
+                id="buscar"
+                type="search"
+                placeholder="Buscar por código, producto o categoría"
+            >
+
+            <select id="filtroRiesgo">
+                <option value="">Todos los riesgos</option>
+                <option value="Alto">Alto</option>
+                <option value="Medio">Medio</option>
+                <option value="Bajo">Bajo</option>
+            </select>
+
+            <button id="nuevoProducto" class="boton boton-verde">
+                + Nuevo producto
+            </button>
+        </div>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Registrado</th>
+                        <th>Físico</th>
+                        <th>Diferencia</th>
+                        <th>Mínimo</th>
+                        <th>Rotación</th>
+                        <th>Antigüedad</th>
+                        <th>Riesgo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cuerpoInventario"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="alertas" class="vista">
+
+    <div class="titulo">
+        <h2>Alertas</h2>
+        <p>Productos clasificados con riesgo alto o medio.</p>
+    </div>
+
+    <div id="listaAlertas"></div>
+
+</section>
+
+<section id="analisis" class="vista">
+
+    <div class="titulo">
+        <h2>Análisis IA</h2>
+        <p>
+            Identifica automáticamente los cinco artículos con mayor
+            diferencia absoluta y sugiere acciones a seguir.
+        </p>
+    </div>
+
+    <div class="tarjeta">
+
+        <div class="herramientas">
+            <button id="analizarTop5" class="boton">
+                🤖 Analizar los 5 artículos con mayor diferencia
+            </button>
+        </div>
+
+        <div class="aviso">
+            <strong>Criterio:</strong>
+            los productos se ordenan por el valor absoluto de la diferencia
+            entre inventario físico e inventario registrado. Un resultado
+            negativo representa faltante y uno positivo representa sobrante.
+        </div>
+
+        <div id="resumenTop5" class="kpis"></div>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Registrado</th>
+                        <th>Físico</th>
+                        <th>Diferencia</th>
+                        <th>Riesgo</th>
+                        <th>Factores</th>
+                        <th>Acciones sugeridas</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cuerpoTop5">
+                    <tr>
+                        <td colspan="9">
+                            Pulsa el botón para ejecutar el análisis.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="dos-columnas">
+        <div class="tarjeta">
+            <h3>Interpretación automática</h3>
+            <div id="interpretacionTop5">
+                El análisis mostrará los productos prioritarios.
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Funcionamiento</h3>
+            <p>
+                El módulo calcula la diferencia absoluta, selecciona los
+                cinco valores más altos, aplica el análisis de riesgo y
+                genera recomendaciones según diferencia, rotación,
+                antigüedad y stock mínimo.
+            </p>
+
+            <div class="aviso">
+                <strong>Transparencia:</strong>
+                el análisis es explicable y no sustituye el conteo físico
+                ni una auditoría.
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="reportes" class="vista">
+
+    <div class="titulo">
+        <h2>Reportes</h2>
+        <p>Indicadores calculados con el inventario actual.</p>
+    </div>
+
+    <div class="kpis">
+        <div class="kpi">
+            <h3>Valor registrado</h3>
+            <strong id="valorInventario">$0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Productos de baja rotación</h3>
+            <strong id="bajaRotacion">0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Productos antiguos</h3>
+            <strong id="altaAntiguedad">0</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Productos bajo mínimo</h3>
+            <strong id="bajoMinimo">0</strong>
+        </div>
+    </div>
+
+    <div class="tarjeta">
+
+        <div class="herramientas">
+            <button id="guardarProgreso" class="boton boton-verde">
+                💾 Guardar progreso
+            </button>
+
+            <button id="descargarAlertas" class="boton boton-gris">
+                Descargar alertas CSV
+            </button>
+
+            <button id="restablecer" class="boton boton-rojo">
+                Restablecer 80 productos
+            </button>
+        </div>
+
+        <p class="texto-gris">
+            Guardar progreso descarga una copia completa del inventario
+            en formato CSV compatible con Excel.
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+</div>
+
+<div id="modalProducto" class="modal">
+
+    <div class="modal-contenido">
+
+        <div class="modal-cabecera">
+            <h3 id="tituloModal">Nuevo producto</h3>
+
+            <button
+                id="cerrarModal"
+                class="cerrar"
+                type="button"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+        </div>
+
+        <form id="formularioProducto">
+
+            <input type="hidden" id="productoId">
+
+            <div class="formulario">
+
+                <label>
+                    <span>Código</span>
+                    <input id="codigo" required>
+                </label>
+
+                <label>
+                    <span>Producto</span>
+                    <input id="nombre" required>
+                </label>
+
+                <label>
+                    <span>Categoría</span>
+                    <select id="categoria">
+                        <option>Deportivo</option>
+                        <option>Casual</option>
+                        <option>Formal</option>
+                        <option>Sandalia</option>
+                        <option>Bota</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Stock registrado</span>
+                    <input id="registrado" type="number" min="0" required>
+                </label>
+
+                <label>
+                    <span>Stock físico</span>
+                    <input id="fisico" type="number" min="0" required>
+                </label>
+
+                <label>
+                    <span>Stock mínimo</span>
+                    <input id="minimo" type="number" min="0" required>
+                </label>
+
+                <label>
+                    <span>Rotación</span>
+                    <select id="rotacion">
+                        <option>Alta</option>
+                        <option>Media</option>
+                        <option>Baja</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Antigüedad en días</span>
+                    <input id="antiguedad" type="number" min="0" required>
+                </label>
+
+                <label>
+                    <span>Precio unitario</span>
+                    <input id="precio" type="number" min="0" required>
+                </label>
+
+            </div>
+
+            <br>
+
+            <button class="boton" type="submit">
+                Guardar producto
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+const CLAVE = "sistemaInventarioIA_v5";
+
+function elemento(id) {
+    return document.getElementById(id);
+}
+
+function obtenerId() {
+    if (
+        window.crypto &&
+        typeof window.crypto.randomUUID === "function"
+    ) {
+        return window.crypto.randomUUID();
+    }
+
+    return (
+        Date.now().toString() +
+        Math.random().toString(16).slice(2)
+    );
+}
+
+function crearDatosIniciales() {
+    const nombres = [
+        "Tenis urbano",
+        "Sandalia clásica",
+        "Bota casual",
+        "Zapato formal",
+        "Tenis deportivo",
+        "Mocasín",
+        "Tacón",
+        "Bota industrial",
+        "Baleta",
+        "Zapato escolar"
+    ];
+
+    const categorias = [
+        "Deportivo",
+        "Sandalia",
+        "Bota",
+        "Formal",
+        "Deportivo",
+        "Casual",
+        "Formal",
+        "Bota",
+        "Casual",
+        "Formal"
+    ];
+
+    const productosIniciales = [];
+
+    for (let i = 0; i < 80; i++) {
+        const registrado = 18 + ((i * 7) % 43);
+
+        let variacion = [
+            0,
+            -1,
+            -2,
+            -3,
+            -6,
+            2,
+            1,
+            -4
+        ][i % 8];
+
+        if (i < 4) {
+            variacion = [-8, -6, -7, -9][i];
+        }
+
+        productosIniciales.push({
+            id: obtenerId(),
+            codigo: "CAL-" + String(i + 1).padStart(3, "0"),
+            nombre:
+                nombres[i % nombres.length] +
+                " " +
+                (Math.floor(i / 10) + 1),
+            categoria: categorias[i % categorias.length],
+            registrado: registrado,
+            fisico: Math.max(0, registrado + variacion),
+            minimo: 8 + (i % 5),
+            rotacion: ["Alta", "Media", "Baja"][i % 3],
+            antiguedad: 20 + ((i * 19) % 210),
+            precio: 75000 + ((i * 8500) % 140000)
+        });
+    }
+
+    return productosIniciales;
+}
+
+let productos;
+
+try {
+    const guardados = JSON.parse(
+        localStorage.getItem(CLAVE) || "null"
+    );
+
+    if (
+        Array.isArray(guardados) &&
+        guardados.length > 0
+    ) {
+        productos = guardados;
+    } else {
+        productos = crearDatosIniciales();
+
+        localStorage.setItem(
+            CLAVE,
+            JSON.stringify(productos)
+        );
+    }
+} catch (error) {
+    console.error(
+        "No fue posible recuperar el inventario:",
+        error
+    );
+
+    productos = crearDatosIniciales();
+
+    localStorage.setItem(
+        CLAVE,
+        JSON.stringify(productos)
+    );
+}
+
+function diferencia(producto) {
+    return (
+        Number(producto.fisico) -
+        Number(producto.registrado)
+    );
+}
+
+function evaluarRiesgo(producto) {
+    let puntuacion = 0;
+    const factores = [];
+    const dif = diferencia(producto);
+
+    if (dif <= -6) {
+        puntuacion += 4;
+        factores.push(
+            "diferencia crítica de " +
+            dif +
+            " unidades"
+        );
+    } else if (dif <= -2) {
+        puntuacion += 2;
+        factores.push(
+            "diferencia negativa de " +
+            dif +
+            " unidades"
+        );
+    } else if (dif > 2) {
+        puntuacion += 1;
+        factores.push(
+            "sobrante frente al registro"
+        );
+    }
+
+    if (producto.rotacion === "Baja") {
+        puntuacion += 2;
+        factores.push("rotación baja");
+    } else if (producto.rotacion === "Media") {
+        puntuacion += 1;
+    }
+
+    if (Number(producto.antiguedad) >= 150) {
+        puntuacion += 2;
+        factores.push(
+            "antigüedad igual o superior a 150 días"
+        );
+    } else if (Number(producto.antiguedad) >= 90) {
+        puntuacion += 1;
+        factores.push(
+            "antigüedad igual o superior a 90 días"
+        );
+    }
+
+    if (
+        Number(producto.fisico) <=
+        Number(producto.minimo)
+    ) {
+        puntuacion += 3;
+        factores.push(
+            "stock físico igual o inferior al mínimo"
+        );
+    }
+
+    let riesgo = "Bajo";
+
+    if (puntuacion >= 6) {
+        riesgo = "Alto";
+    } else if (puntuacion >= 3) {
+        riesgo = "Medio";
+    }
+
+    let recomendacion =
+        "Mantener control periódico.";
+
+    if (riesgo === "Alto") {
+        recomendacion =
+            "Realizar conteo prioritario, revisar movimientos y documentar la novedad.";
+    } else if (riesgo === "Medio") {
+        recomendacion =
+            "Programar revisión y hacer seguimiento al inventario.";
+    }
+
+    return {
+        riesgo,
+        puntuacion,
+        factores:
+            factores.length > 0
+                ? factores
+                : ["sin desviaciones relevantes"],
+        recomendacion
+    };
+}
+
+function accionesSugeridas(producto) {
+    const dif = diferencia(producto);
+    const evaluacion = evaluarRiesgo(producto);
+    const acciones = [];
+
+    if (dif < 0) {
+        acciones.push(
+            "Realizar conteo físico inmediato"
+        );
+        acciones.push(
+            "Revisar ventas, entradas, salidas y ajustes no registrados"
+        );
+        acciones.push(
+            "Corregir el inventario después de validar la causa"
+        );
+    } else if (dif > 0) {
+        acciones.push(
+            "Confirmar el sobrante con un segundo conteo"
+        );
+        acciones.push(
+            "Revisar entradas o devoluciones pendientes"
+        );
+        acciones.push(
+            "Documentar el hallazgo antes de actualizar"
+        );
+    } else {
+        acciones.push(
+            "Mantener el control periódico"
+        );
+    }
+
+    if (producto.rotacion === "Baja") {
+        acciones.push(
+            "Evaluar promoción, traslado o estrategia de salida"
+        );
+    }
+
+    if (Number(producto.antiguedad) >= 150) {
+        acciones.push(
+            "Priorizar la salida por alta antigüedad"
+        );
+    }
+
+    if (
+        Number(producto.fisico) <=
+        Number(producto.minimo)
+    ) {
+        acciones.push(
+            "Evaluar reposición por stock mínimo"
+        );
+    }
+
+    if (evaluacion.riesgo === "Alto") {
+        acciones.push(
+            "Asignar revisión prioritaria y dejar evidencia"
+        );
+    }
+
+    return [...new Set(acciones)];
+}
+
+function guardarDatos() {
+    localStorage.setItem(
+        CLAVE,
+        JSON.stringify(productos)
+    );
+
+    actualizarTodo();
+}
+
+function mostrarVista(id) {
+    document
+        .querySelectorAll(".vista")
+        .forEach(function(vista) {
+            vista.classList.toggle(
+                "activa",
+                vista.id === id
+            );
+        });
+
+    document
+        .querySelectorAll(".boton-menu")
+        .forEach(function(boton) {
+            boton.classList.toggle(
+                "activo",
+                boton.dataset.vista === id
+            );
+        });
+
+    if (id === "analisis") {
+        analizarCinco();
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+document
+    .querySelectorAll(".boton-menu")
+    .forEach(function(boton) {
+        boton.addEventListener(
+            "click",
+            function() {
+                mostrarVista(
+                    boton.dataset.vista
+                );
+            }
+        );
+    });
+
+function actualizarInicio() {
+    const cantidades = {
+        Alto: 0,
+        Medio: 0,
+        Bajo: 0
+    };
+
+    productos.forEach(function(producto) {
+        cantidades[
+            evaluarRiesgo(producto).riesgo
+        ]++;
+    });
+
+    elemento("totalProductos").textContent =
+        productos.length;
+
+    elemento("totalAlto").textContent =
+        cantidades.Alto;
+
+    elemento("totalFisico").textContent =
+        productos.reduce(
+            function(total, producto) {
+                return (
+                    total +
+                    Number(producto.fisico)
+                );
+            },
+            0
+        );
+
+    elemento("totalDiferencia").textContent =
+        productos.reduce(
+            function(total, producto) {
+                return (
+                    total +
+                    Math.abs(
+                        diferencia(producto)
+                    )
+                );
+            },
+            0
+        );
+
+    elemento("distribucionRiesgo").innerHTML =
+        ["Alto", "Medio", "Bajo"]
+            .map(function(riesgo) {
+                const porcentaje =
+                    productos.length > 0
+                        ? (
+                            cantidades[riesgo] /
+                            productos.length
+                        ) * 100
+                        : 0;
+
+                return `
+                    <div class="barra-fila">
+                        <span>${riesgo}</span>
+
+                        <div class="barra-fondo">
+                            <div
+                                class="barra barra-${riesgo.toLowerCase()}"
+                                style="width:${porcentaje}%"
+                            ></div>
+                        </div>
+
+                        <strong>
+                            ${cantidades[riesgo]}
+                        </strong>
+                    </div>
+                `;
+            })
+            .join("");
+
+    const altos = productos
+        .filter(function(producto) {
+            return (
+                evaluarRiesgo(producto).riesgo ===
+                "Alto"
+            );
+        })
+        .slice(0, 5);
+
+    if (altos.length === 0) {
+        elemento("alertasInicio").innerHTML =
+            "<p>No existen alertas de riesgo alto.</p>";
+
+        return;
+    }
+
+    elemento("alertasInicio").innerHTML =
+        altos
+            .map(function(producto) {
+                return `
+                    <div class="alerta">
+                        <strong>
+                            ${producto.codigo} ·
+                            ${producto.nombre}
+                        </strong>
+
+                        <br>
+
+                        <span class="texto-gris">
+                            Diferencia:
+                            ${diferencia(producto)}
+                        </span>
+                    </div>
+                `;
+            })
+            .join("");
+}
+
+function actualizarInventario() {
+    const texto =
+        elemento("buscar")
+            .value
+            .toLowerCase();
+
+    const filtro =
+        elemento("filtroRiesgo").value;
+
+    const filtrados =
+        productos.filter(function(producto) {
+            const contenido = (
+                producto.codigo +
+                " " +
+                producto.nombre +
+                " " +
+                producto.categoria
+            ).toLowerCase();
+
+            const riesgo =
+                evaluarRiesgo(producto).riesgo;
+
+            return (
+                contenido.includes(texto) &&
+                (
+                    filtro === "" ||
+                    riesgo === filtro
+                )
+            );
+        });
+
+    if (filtrados.length === 0) {
+        elemento("cuerpoInventario").innerHTML = `
+            <tr>
+                <td colspan="11">
+                    No se encontraron productos.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    elemento("cuerpoInventario").innerHTML =
+        filtrados
+            .map(function(producto) {
+                const evaluacion =
+                    evaluarRiesgo(producto);
+
+                return `
+                    <tr>
+                        <td>${producto.codigo}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.categoria}</td>
+                        <td>${producto.registrado}</td>
+                        <td>${producto.fisico}</td>
+                        <td>${diferencia(producto)}</td>
+                        <td>${producto.minimo}</td>
+                        <td>${producto.rotacion}</td>
+                        <td>
+                            ${producto.antiguedad}
+                            días
+                        </td>
+                        <td>
+                            <span
+                                class="insignia riesgo-${evaluacion.riesgo}"
+                            >
+                                ${evaluacion.riesgo}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="acciones">
+                                <button
+                                    class="boton boton-pequeno"
+                                    onclick="editarProducto('${producto.id}')"
+                                >
+                                    Editar
+                                </button>
+
+                                <button
+                                    class="boton boton-gris boton-pequeno"
+                                    onclick="ajustarProducto('${producto.id}')"
+                                >
+                                    Ajustar
+                                </button>
+
+                                <button
+                                    class="boton boton-rojo boton-pequeno"
+                                    onclick="eliminarProducto('${producto.id}')"
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            })
+            .join("");
+}
+
+function actualizarAlertas() {
+    const alertas = productos
+        .map(function(producto) {
+            return {
+                producto,
+                evaluacion:
+                    evaluarRiesgo(producto)
+            };
+        })
+        .filter(function(item) {
+            return (
+                item.evaluacion.riesgo !==
+                "Bajo"
+            );
+        })
+        .sort(function(a, b) {
+            return (
+                b.evaluacion.puntuacion -
+                a.evaluacion.puntuacion
+            );
+        });
+
+    if (alertas.length === 0) {
+        elemento("listaAlertas").innerHTML =
+            "<div class='tarjeta'>No existen alertas.</div>";
+
+        return;
+    }
+
+    elemento("listaAlertas").innerHTML =
+        alertas
+            .map(function(item) {
+                return `
+                    <div class="tarjeta">
+                        <span
+                            class="insignia riesgo-${item.evaluacion.riesgo}"
+                        >
+                            ${item.evaluacion.riesgo}
+                        </span>
+
+                        <h3>
+                            ${item.producto.codigo} ·
+                            ${item.producto.nombre}
+                        </h3>
+
+                        <p>
+                            <strong>Diferencia:</strong>
+                            ${diferencia(item.producto)}
+                        </p>
+
+                        <p>
+                            <strong>Factores:</strong>
+                            ${item.evaluacion.factores.join("; ")}
+                        </p>
+
+                        <p>
+                            <strong>Recomendación:</strong>
+                            ${item.evaluacion.recomendacion}
+                        </p>
+
+                        <button
+                            class="boton boton-pequeno"
+                            onclick="abrirAnalisis()"
+                        >
+                            Ver análisis general
+                        </button>
+                    </div>
+                `;
+            })
+            .join("");
+}
+
+window.abrirAnalisis = function() {
+    mostrarVista("analisis");
+};
+
+function analizarCinco() {
+    if (
+        !Array.isArray(productos) ||
+        productos.length === 0
+    ) {
+        productos = crearDatosIniciales();
+        guardarDatos();
+        return;
+    }
+
+    const cinco = [...productos]
+        .sort(function(a, b) {
+            const diferenciaAbsoluta =
+                Math.abs(diferencia(b)) -
+                Math.abs(diferencia(a));
+
+            if (diferenciaAbsoluta !== 0) {
+                return diferenciaAbsoluta;
+            }
+
+            return (
+                evaluarRiesgo(b).puntuacion -
+                evaluarRiesgo(a).puntuacion
+            );
+        })
+        .slice(0, 5);
+
+    const faltantes =
+        cinco.filter(function(producto) {
+            return diferencia(producto) < 0;
+        });
+
+    const sobrantes =
+        cinco.filter(function(producto) {
+            return diferencia(producto) > 0;
+        });
+
+    const altos =
+        cinco.filter(function(producto) {
+            return (
+                evaluarRiesgo(producto).riesgo ===
+                "Alto"
+            );
+        });
+
+    const acumulada =
+        cinco.reduce(
+            function(total, producto) {
+                return (
+                    total +
+                    Math.abs(
+                        diferencia(producto)
+                    )
+                );
+            },
+            0
+        );
+
+    elemento("resumenTop5").innerHTML = `
+        <div class="kpi">
+            <h3>Diferencia acumulada</h3>
+            <strong>${acumulada}</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Con faltante</h3>
+            <strong>${faltantes.length}</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Con sobrante</h3>
+            <strong>${sobrantes.length}</strong>
+        </div>
+
+        <div class="kpi">
+            <h3>Riesgo alto</h3>
+            <strong>${altos.length}</strong>
+        </div>
+    `;
+
+    elemento("cuerpoTop5").innerHTML =
+        cinco
+            .map(function(producto, indice) {
+                const evaluacion =
+                    evaluarRiesgo(producto);
+
+                const dif =
+                    diferencia(producto);
+
+                const acciones =
+                    accionesSugeridas(producto);
+
+                return `
+                    <tr>
+                        <td>${indice + 1}</td>
+                        <td>${producto.codigo}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.registrado}</td>
+                        <td>${producto.fisico}</td>
+                        <td>
+                            <strong>
+                                ${dif > 0 ? "+" : ""}${dif}
+                            </strong>
+                        </td>
+                        <td>
+                            <span
+                                class="insignia riesgo-${evaluacion.riesgo}"
+                            >
+                                ${evaluacion.riesgo}
+                            </span>
+                        </td>
+                        <td>
+                            ${evaluacion.factores.join("; ")}
+                        </td>
+                        <td>
+                            ${acciones
+                                .map(function(accion) {
+                                    return "• " + accion;
+                                })
+                                .join("<br>")
+                            }
+                        </td>
+                    </tr>
+                `;
+            })
+            .join("");
+
+    const principal = cinco[0];
+
+    elemento("interpretacionTop5").innerHTML = `
+        <p>
+            <strong>Hallazgo principal:</strong>
+            ${principal.codigo} ·
+            ${principal.nombre}
+            presenta la mayor diferencia absoluta:
+            ${diferencia(principal)}
+            unidades.
+        </p>
+
+        <p>
+            <strong>Resumen:</strong>
+            ${faltantes.length}
+            artículos con faltante,
+            ${sobrantes.length}
+            con sobrante y
+            ${altos.length}
+            clasificados con riesgo alto.
+        </p>
+
+        <p>
+            <strong>Prioridad sugerida:</strong>
+            comenzar por los artículos con riesgo alto y faltante,
+            realizar el conteo físico, revisar movimientos y
+            documentar cualquier ajuste antes de modificar
+            el registro.
+        </p>
+    `;
+}
+
+function actualizarReportes() {
+    const valor =
+        productos.reduce(
+            function(total, producto) {
+                return (
+                    total +
+                    Number(producto.registrado) *
+                    Number(producto.precio)
+                );
+            },
+            0
+        );
+
+    elemento("valorInventario").textContent =
+        new Intl.NumberFormat(
+            "es-CO",
+            {
+                style: "currency",
+                currency: "COP",
+                maximumFractionDigits: 0
+            }
+        ).format(valor);
+
+    elemento("bajaRotacion").textContent =
+        productos.filter(function(producto) {
+            return producto.rotacion === "Baja";
+        }).length;
+
+    elemento("altaAntiguedad").textContent =
+        productos.filter(function(producto) {
+            return (
+                Number(producto.antiguedad) >=
+                150
+            );
+        }).length;
+
+    elemento("bajoMinimo").textContent =
+        productos.filter(function(producto) {
+            return (
+                Number(producto.fisico) <=
+                Number(producto.minimo)
+            );
+        }).length;
+}
+
+function actualizarTodo() {
+    if (
+        !Array.isArray(productos) ||
+        productos.length === 0
+    ) {
+        productos = crearDatosIniciales();
+
+        localStorage.setItem(
+            CLAVE,
+            JSON.stringify(productos)
+        );
+    }
+
+    actualizarInicio();
+    actualizarInventario();
+    actualizarAlertas();
+    actualizarReportes();
+}
+
+elemento("buscar").addEventListener(
+    "input",
+    actualizarInventario
+);
+
+elemento("filtroRiesgo").addEventListener(
+    "change",
+    actualizarInventario
+);
+
+function abrirModal() {
+    elemento("modalProducto")
+        .classList
+        .add("activo");
+}
+
+function cerrarModal() {
+    elemento("modalProducto")
+        .classList
+        .remove("activo");
+
+    elemento("formularioProducto").reset();
+    elemento("productoId").value = "";
+}
+
+elemento("nuevoProducto").onclick =
+function() {
+    cerrarModal();
+
+    elemento("tituloModal").textContent =
+        "Nuevo producto";
+
+    abrirModal();
+};
+
+elemento("cerrarModal").onclick =
+    cerrarModal;
+
+elemento("modalProducto").addEventListener(
+    "click",
+    function(evento) {
+        if (
+            evento.target ===
+            elemento("modalProducto")
+        ) {
+            cerrarModal();
+        }
+    }
+);
+
+elemento("formularioProducto").onsubmit =
+function(evento) {
+    evento.preventDefault();
+
+    const id =
+        elemento("productoId").value;
+
+    const datos = {
+        id: id || obtenerId(),
+        codigo:
+            elemento("codigo")
+                .value
+                .trim(),
+        nombre:
+            elemento("nombre")
+                .value
+                .trim(),
+        categoria:
+            elemento("categoria").value,
+        registrado:
+            Number(
+                elemento("registrado").value
+            ),
+        fisico:
+            Number(
+                elemento("fisico").value
+            ),
+        minimo:
+            Number(
+                elemento("minimo").value
+            ),
+        rotacion:
+            elemento("rotacion").value,
+        antiguedad:
+            Number(
+                elemento("antiguedad").value
+            ),
+        precio:
+            Number(
+                elemento("precio").value
+            )
+    };
+
+    const repetido =
+        productos.some(function(producto) {
+            return (
+                producto.codigo
+                    .toLowerCase() ===
+                datos.codigo
+                    .toLowerCase() &&
+                producto.id !== id
+            );
+        });
+
+    if (repetido) {
+        alert("El código ya existe.");
+        return;
+    }
+
+    if (id) {
+        productos =
+            productos.map(function(producto) {
+                return (
+                    producto.id === id
+                        ? datos
+                        : producto
+                );
+            });
+    } else {
+        productos.push(datos);
+    }
+
+    cerrarModal();
+    guardarDatos();
+};
+
+window.editarProducto = function(id) {
+    const producto =
+        productos.find(function(item) {
+            return item.id === id;
+        });
+
+    if (!producto) {
+        return;
+    }
+
+    elemento("tituloModal").textContent =
+        "Editar producto";
+
+    elemento("productoId").value =
+        producto.id;
+
+    elemento("codigo").value =
+        producto.codigo;
+
+    elemento("nombre").value =
+        producto.nombre;
+
+    elemento("categoria").value =
+        producto.categoria;
+
+    elemento("registrado").value =
+        producto.registrado;
+
+    elemento("fisico").value =
+        producto.fisico;
+
+    elemento("minimo").value =
+        producto.minimo;
+
+    elemento("rotacion").value =
+        producto.rotacion;
+
+    elemento("antiguedad").value =
+        producto.antiguedad;
+
+    elemento("precio").value =
+        producto.precio;
+
+    abrirModal();
+};
+
+window.ajustarProducto = function(id) {
+    const producto =
+        productos.find(function(item) {
+            return item.id === id;
+        });
+
+    if (!producto) {
+        return;
+    }
+
+    const valor = prompt(
+        "Nueva cantidad física para " +
+        producto.nombre,
+        producto.fisico
+    );
+
+    if (valor === null) {
+        return;
+    }
+
+    const cantidad = Number(valor);
+
+    if (
+        !Number.isInteger(cantidad) ||
+        cantidad < 0
+    ) {
+        alert(
+            "Introduce un número entero válido."
+        );
+
+        return;
+    }
+
+    producto.fisico = cantidad;
+    guardarDatos();
+};
+
+window.eliminarProducto = function(id) {
+    const producto =
+        productos.find(function(item) {
+            return item.id === id;
+        });
+
+    if (!producto) {
+        return;
+    }
+
+    const confirmar = confirm(
+        "¿Eliminar " +
+        producto.nombre +
+        "?"
+    );
+
+    if (confirmar) {
+        productos =
+            productos.filter(function(item) {
+                return item.id !== id;
+            });
+
+        guardarDatos();
+    }
+};
+
+elemento("analizarTop5").onclick =
+    analizarCinco;
+
+function protegerCSV(valor) {
+    return (
+        '"' +
+        String(valor)
+            .replaceAll('"', '""') +
+        '"'
+    );
+}
+
+function descargarCSV(filas, nombre) {
+    const contenido =
+        "\ufeff" +
+        filas
+            .map(function(fila) {
+                return fila
+                    .map(protegerCSV)
+                    .join(";");
+            })
+            .join("\n");
+
+    const archivo =
+        new Blob(
+            [contenido],
+            {
+                type:
+                    "text/csv;charset=utf-8"
+            }
+        );
+
+    const enlace =
+        document.createElement("a");
+
+    enlace.href =
+        URL.createObjectURL(archivo);
+
+    enlace.download = nombre;
+    enlace.click();
+
+    URL.revokeObjectURL(
+        enlace.href
+    );
+}
+
+elemento("guardarProgreso").onclick =
+function() {
+    const fecha = new Date();
+
+    const dosDigitos =
+        function(numero) {
+            return String(numero)
+                .padStart(2, "0");
+        };
+
+    const marca =
+        fecha.getFullYear() +
+        "-" +
+        dosDigitos(
+            fecha.getMonth() + 1
+        ) +
+        "-" +
+        dosDigitos(
+            fecha.getDate()
+        ) +
+        "_" +
+        dosDigitos(
+            fecha.getHours()
+        ) +
+        "-" +
+        dosDigitos(
+            fecha.getMinutes()
+        );
+
+    const filas = [
+        [
+            "SISTEMA INTELIGENTE DE GESTIÓN DE INVENTARIOS"
+        ],
+        [
+            "Fecha de guardado",
+            fecha.toLocaleString("es-CO")
+        ],
+        [
+            "Total de productos",
+            productos.length
+        ],
+        [],
+        [
+            "Código",
+            "Producto",
+            "Categoría",
+            "Inventario registrado",
+            "Inventario físico",
+            "Diferencia",
+            "Stock mínimo",
+            "Rotación",
+            "Antigüedad en días",
+            "Precio unitario COP",
+            "Nivel de riesgo",
+            "Puntuación",
+            "Factores detectados",
+            "Recomendación"
+        ]
+    ];
+
+    productos.forEach(function(producto) {
+        const evaluacion =
+            evaluarRiesgo(producto);
+
+        filas.push([
+            producto.codigo,
+            producto.nombre,
+            producto.categoria,
+            producto.registrado,
+            producto.fisico,
+            diferencia(producto),
+            producto.minimo,
+            producto.rotacion,
+            producto.antiguedad,
+            producto.precio,
+            evaluacion.riesgo,
+            evaluacion.puntuacion,
+            evaluacion.factores.join(" | "),
+            evaluacion.recomendacion
+        ]);
+    });
+
+    descargarCSV(
+        filas,
+        "progreso_inventario_" +
+        marca +
+        ".csv"
+    );
+};
+
+elemento("descargarAlertas").onclick =
+function() {
+    const filas = [
+        [
+            "Código",
+            "Producto",
+            "Riesgo",
+            "Diferencia",
+            "Factores",
+            "Acciones sugeridas"
+        ]
+    ];
+
+    productos
+        .filter(function(producto) {
+            return (
+                evaluarRiesgo(producto)
+                    .riesgo !== "Bajo"
+            );
+        })
+        .forEach(function(producto) {
+            const evaluacion =
+                evaluarRiesgo(producto);
+
+            filas.push([
+                producto.codigo,
+                producto.nombre,
+                evaluacion.riesgo,
+                diferencia(producto),
+                evaluacion.factores.join(" | "),
+                accionesSugeridas(producto)
+                    .join(" | ")
+            ]);
+        });
+
+    descargarCSV(
+        filas,
+        "alertas_inventario.csv"
+    );
+};
+
+elemento("restablecer").onclick =
+function() {
+    const aceptar = confirm(
+        "¿Restablecer los 80 productos simulados? Se eliminarán las modificaciones guardadas en este navegador."
+    );
+
+    if (!aceptar) {
+        return;
+    }
+
+    productos = crearDatosIniciales();
+    guardarDatos();
+
+    alert(
+        "Se restauraron correctamente los 80 productos."
+    );
+};
+
+actualizarTodo();
+</script>
+
+</body>
+</html>
