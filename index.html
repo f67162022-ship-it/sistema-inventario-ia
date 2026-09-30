@@ -4,263 +4,369 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sistema Inteligente de Inventarios</title>
+<title>Sistema inteligente de gestión de inventarios</title>
 
 <style>
+:root {
+    --azul: #172554;
+    --azul-claro: #2563eb;
+    --oscuro: #111827;
+    --fondo: #f4f6f9;
+    --blanco: #ffffff;
+    --gris: #6b7280;
+    --rojo: #dc2626;
+    --amarillo: #d97706;
+    --verde: #16a34a;
+    --borde: #e5e7eb;
+}
+
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: #f4f6f9;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--fondo);
     color: #1f2937;
 }
 
 header {
-    background: #172554;
+    background: var(--azul);
     color: white;
-    padding: 25px 35px;
+    padding: 22px 30px;
 }
 
 header h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
+    margin: 0 0 7px;
+    font-size: 27px;
 }
 
 header p {
-    font-size: 15px;
+    margin: 0;
     opacity: 0.9;
 }
 
 .contenedor {
     display: flex;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 103px);
 }
 
 .sidebar {
-    width: 220px;
-    background: #111827;
+    width: 230px;
+    background: var(--oscuro);
+    padding: 22px 14px;
     color: white;
-    padding: 25px 15px;
 }
 
 .sidebar h2 {
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
-.sidebar div {
-    padding: 14px;
-    margin-bottom: 8px;
+.menu {
+    display: block;
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    text-align: left;
+    padding: 13px;
+    margin: 5px 0;
     border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.sidebar div:hover {
+.menu:hover,
+.menu.activo {
     background: #1e3a8a;
 }
 
 .principal {
     flex: 1;
-    padding: 30px;
+    padding: 27px;
+    min-width: 0;
+}
+
+.vista {
+    display: none;
+}
+
+.vista.activa {
+    display: block;
 }
 
 .titulo {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .titulo h2 {
+    margin: 0;
     font-size: 24px;
 }
 
 .titulo p {
-    color: #6b7280;
+    color: var(--gris);
     margin-top: 5px;
 }
 
 .kpis {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
-.kpi {
+.kpi,
+.tarjeta {
     background: white;
-    padding: 22px;
     border-radius: 12px;
+    padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .kpi h3 {
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 10px;
+    margin: 0 0 9px;
+    color: var(--gris);
+    font-size: 13px;
 }
 
 .kpi strong {
-    font-size: 27px;
-}
-
-.contenido {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    font-size: 26px;
 }
 
 .tarjeta {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
-.tarjeta h2 {
-    margin-bottom: 18px;
-    color: #172554;
+.tarjeta h3 {
+    margin-top: 0;
+    color: var(--azul);
 }
 
-label {
-    display: block;
-    margin-top: 12px;
-    margin-bottom: 6px;
-    font-weight: bold;
-    font-size: 14px;
+.herramientas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
-input, select {
-    width: 100%;
-    padding: 11px;
+input,
+select {
+    padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 7px;
+    background: white;
 }
 
-button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 13px;
+#buscar {
+    min-width: 240px;
+    flex: 1;
+}
+
+.boton {
     border: none;
     border-radius: 8px;
-    background: #2563eb;
+    padding: 10px 14px;
     color: white;
-    font-size: 16px;
+    background: var(--azul-claro);
     font-weight: bold;
     cursor: pointer;
 }
 
-button:hover {
-    background: #1d4ed8;
+.boton:hover {
+    filter: brightness(0.93);
 }
 
-.resultado {
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 8px;
-    display: none;
+.boton-verde {
+    background: var(--verde);
 }
 
-.alto {
-    background: #fee2e2;
-    border-left: 6px solid #dc2626;
+.boton-rojo {
+    background: var(--rojo);
 }
 
-.medio {
-    background: #fef3c7;
-    border-left: 6px solid #d97706;
+.boton-gris {
+    background: #475569;
 }
 
-.bajo {
-    background: #dcfce7;
-    border-left: 6px solid #16a34a;
+.boton-pequeno {
+    padding: 7px 9px;
+    font-size: 12px;
 }
 
-.resultado h3 {
-    margin-bottom: 8px;
+.tabla-contenedor {
+    overflow-x: auto;
 }
 
-.tabla {
+table {
     width: 100%;
+    min-width: 850px;
     border-collapse: collapse;
 }
 
-.tabla th,
-.tabla td {
-    padding: 11px;
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--borde);
     text-align: left;
-    border-bottom: 1px solid #e5e7eb;
+    font-size: 13px;
 }
 
-.tabla th {
+th {
     background: #f3f4f6;
 }
 
-.riesgo {
+.insignia {
+    display: inline-block;
     padding: 5px 9px;
-    border-radius: 15px;
-    font-size: 12px;
+    border-radius: 14px;
+    font-size: 11px;
     font-weight: bold;
 }
 
-.riesgo-alto {
+.riesgo-Alto {
     background: #fee2e2;
     color: #b91c1c;
 }
 
-.riesgo-medio {
+.riesgo-Medio {
     background: #fef3c7;
     color: #92400e;
 }
 
-.riesgo-bajo {
+.riesgo-Bajo {
     background: #dcfce7;
     color: #166534;
 }
 
-.flujo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
+.alerta {
+    padding: 15px;
+    border-left: 5px solid var(--rojo);
+    background: #fff5f5;
+    border-radius: 8px;
+    margin-bottom: 12px;
 }
 
-.paso {
+.aviso {
+    padding: 13px;
     background: #eff6ff;
-    color: #1d4ed8;
-    padding: 10px 13px;
+    border-left: 5px solid var(--azul-claro);
     border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.formulario label {
     font-size: 13px;
     font-weight: bold;
 }
 
-.flecha {
-    font-weight: bold;
-    color: #6b7280;
+.formulario label span {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.info {
+.formulario input,
+.formulario select {
+    width: 100%;
+}
+
+.acciones {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 20;
+}
+
+.modal.activo {
+    display: flex;
+}
+
+.modal-contenido {
+    background: white;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.modal-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cerrar {
+    border: none;
+    background: transparent;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.interpretacion {
     line-height: 1.6;
-    color: #4b5563;
 }
 
-@media (max-width: 850px) {
-
+@media (max-width: 950px) {
     .contenedor {
-        flex-direction: column;
+        display: block;
     }
 
     .sidebar {
         width: 100%;
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+    }
+
+    .sidebar h2 {
+        display: none;
+    }
+
+    .menu {
+        width: auto;
+        white-space: nowrap;
     }
 
     .kpis {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 570px) {
+    header h1 {
+        font-size: 21px;
     }
 
-    .contenido {
+    .principal {
+        padding: 17px;
+    }
+
+    .kpis,
+    .formulario {
         grid-template-columns: 1fr;
     }
 }
@@ -270,273 +376,29 @@ button:hover {
 <body>
 
 <header>
-    <h1>📦 Sistema Inteligente para la Gestión, Análisis y Control de Inventarios</h1>
-    <p>Analizador inteligente de riesgos de inventario</p>
+    <h1>📦 Sistema inteligente de gestión de inventarios</h1>
+    <p>Control, alertas y análisis explicable de riesgo</p>
 </header>
 
 <div class="contenedor">
 
-    <aside class="sidebar">
-        <h2>MENÚ</h2>
+<nav class="sidebar">
+    <h2>MENÚ</h2>
 
-        <div>🏠 Inicio</div>
-        <div>📦 Inventario</div>
-        <div>⚠️ Alertas</div>
-        <div>🤖 Análisis IA</div>
-        <div>📊 Reportes</div>
-    </aside>
+    <button class="menu activo" data-vista="inicio">
+        🏠 Inicio
+    </button>
 
-    <main class="principal">
+    <button class="menu" data-vista="inventario">
+        📦 Inventario
+    </button>
 
-        <div class="titulo">
-            <h2>Panel de control</h2>
-            <p>Consulta y análisis inteligente del inventario</p>
-        </div>
+    <button class="menu" data-vista="alertas">
+        ⚠️ Alertas
+    </button>
 
-        <section class="kpis">
+    <button class="menu" data-vista="analisis">
+        🤖 Análisis IA
+    </button>
 
-            <div class="kpi">
-                <h3>Productos registrados</h3>
-                <strong>80</strong>
-            </div>
-
-            <div class="kpi">
-                <h3>Productos en riesgo</h3>
-                <strong>4</strong>
-            </div>
-
-            <div class="kpi">
-                <h3>Analizador IA</h3>
-                <strong>Activo 🤖</strong>
-            </div>
-
-        </section>
-
-        <div class="contenido">
-
-            <section class="tarjeta">
-
-                <h2>🤖 Analizador Inteligente de Riesgos</h2>
-
-                <p class="info">
-                    Analiza las variables del inventario para identificar
-                    productos con riesgo bajo, medio o alto y generar una
-                    recomendación de revisión.
-                </p>
-
-                <label>Producto</label>
-                <input type="text" id="producto" value="Zapato C">
-
-                <label>Diferencia de inventario</label>
-                <input type="number" id="diferencia" value="-8">
-
-                <label>Rotación</label>
-                <select id="rotacion">
-                    <option value="1">Baja</option>
-                    <option value="2">Media</option>
-                    <option value="4">Alta</option>
-                </select>
-
-                <label>Antigüedad de la mercancía</label>
-                <select id="antiguedad">
-                    <option value="5">Alta</option>
-                    <option value="3">Media</option>
-                    <option value="1">Baja</option>
-                </select>
-
-                <button onclick="analizarRiesgo()">
-                    🔍 Analizar riesgo
-                </button>
-
-                <div id="resultado" class="resultado"></div>
-
-            </section>
-
-            <section class="tarjeta">
-
-                <h2>📦 Inventario</h2>
-
-                <table class="tabla">
-
-                    <tr>
-                        <th>Producto</th>
-                        <th>Registrado</th>
-                        <th>Físico</th>
-                        <th>Riesgo</th>
-                    </tr>
-
-                    <tr>
-                        <td>Zapato A</td>
-                        <td>50</td>
-                        <td>49</td>
-                        <td>
-                            <span class="riesgo riesgo-bajo">
-                                Bajo
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Zapato B</td>
-                        <td>30</td>
-                        <td>30</td>
-                        <td>
-                            <span class="riesgo riesgo-bajo">
-                                Bajo
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Zapato C</td>
-                        <td>40</td>
-                        <td>32</td>
-                        <td>
-                            <span class="riesgo riesgo-alto">
-                                Alto
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Zapato D</td>
-                        <td>25</td>
-                        <td>23</td>
-                        <td>
-                            <span class="riesgo riesgo-medio">
-                                Medio
-                            </span>
-                        </td>
-                    </tr>
-
-                </table>
-
-            </section>
-
-        </div>
-
-        <section class="tarjeta">
-
-            <h2>🔄 Funcionamiento del componente de IA</h2>
-
-            <div class="flujo">
-
-                <div class="paso">Datos del inventario</div>
-
-                <div class="flecha">→</div>
-
-                <div class="paso">Procesamiento</div>
-
-                <div class="flecha">→</div>
-
-                <div class="paso">Análisis de variables</div>
-
-                <div class="flecha">→</div>
-
-                <div class="paso">Clasificación del riesgo</div>
-
-                <div class="flecha">→</div>
-
-                <div class="paso">Alerta</div>
-
-                <div class="flecha">→</div>
-
-                <div class="paso">Recomendación</div>
-
-            </div>
-
-        </section>
-
-        <section class="tarjeta">
-
-            <h2>📋 Ejemplo de análisis</h2>
-
-            <p class="info">
-                <strong>Producto:</strong> Zapato C<br>
-                <strong>Cantidad registrada:</strong> 40<br>
-                <strong>Cantidad física:</strong> 32<br>
-                <strong>Diferencia:</strong> -8<br>
-                <strong>Rotación:</strong> Baja<br>
-                <strong>Antigüedad:</strong> Alta<br>
-                <strong>Resultado:</strong> Riesgo alto
-            </p>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script>
-
-function analizarRiesgo() {
-
-    let producto = document.getElementById("producto").value;
-
-    let diferencia = Number(
-        document.getElementById("diferencia").value
-    );
-
-    let rotacion = Number(
-        document.getElementById("rotacion").value
-    );
-
-    let antiguedad = Number(
-        document.getElementById("antiguedad").value
-    );
-
-    let riesgo;
-    let recomendacion;
-    let clase;
-
-    if (
-        diferencia <= -5 &&
-        rotacion <= 2 &&
-        antiguedad >= 4
-    ) {
-
-        riesgo = "ALTO";
-        clase = "alto";
-
-        recomendacion =
-            "Revisar inmediatamente el inventario, verificar las existencias físicas y analizar acciones para mejorar la salida del producto.";
-
-    } else if (
-        diferencia <= -2 ||
-        antiguedad >= 3
-    ) {
-
-        riesgo = "MEDIO";
-        clase = "medio";
-
-        recomendacion =
-            "Realizar seguimiento al producto y revisar periódicamente su inventario y rotación.";
-
-    } else {
-
-        riesgo = "BAJO";
-        clase = "bajo";
-
-        recomendacion =
-            "Mantener el seguimiento normal del producto.";
-
-    }
-
-    let resultado = document.getElementById("resultado");
-
-    resultado.style.display = "block";
-
-    resultado.className = "resultado " + clase;
-
-    resultado.innerHTML = `
-        <h3>⚠️ Resultado del análisis</h3>
-        <p><strong>Producto:</strong> ${producto}</p>
-        <p><strong>Nivel de riesgo:</strong> ${riesgo}</p>
-        <p><strong>Recomendación:</strong> ${recomendacion}</p>
-    `;
-}
-
-</script>
-
-</body>
-</html>
+    <button class="menu" data-
